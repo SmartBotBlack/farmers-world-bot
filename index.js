@@ -30,7 +30,7 @@
 
             await new Promise((res) => setTimeout(res, 1e3));
 
-            if (mapId === 1) {
+            if (mapId === 0) {
               while (
                 !document.querySelector(".modal__button-group .plain-button")
               ) {
