@@ -11,3 +11,4 @@
 
 1. Working with all the maps. Able to work with any kind of NFT.
 2. The script presses the "Mine" button on any map when the button is available.
+3. If energy is less than 100 and food more than 20, it makes an exchange.

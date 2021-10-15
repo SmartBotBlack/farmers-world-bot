@@ -48,6 +48,22 @@
           }
 
           await new Promise((res) => setTimeout(res, 3e3));
+
+          const currentEnergy = +document.querySelectorAll(
+            ".resource-number div"
+          )[3].innerText;
+          const currentFish =
+            +document.querySelectorAll(".resource-number")[2].innerText;
+          if (currentEnergy < 100 && currentFish > 20) {
+            document.querySelector(".resource-energy img").click();
+            await new Promise((res) => setTimeout(res, 1e3));
+
+            document.querySelector(".modal-wrapper .modal-input").value = "100";
+
+            document.querySelector(".modal-wrapper .plain-button").click();
+
+            await new Promise((res) => setTimeout(res, 3e3));
+          }
         }
       }
 
