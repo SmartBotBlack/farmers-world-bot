@@ -1,12 +1,27 @@
 (async () => {
-  const result = [];
+  let result = {};
+  let currentDate = new Date();
+  let needResetResult = false;
+  setTimeout(() => {
+    needResetResult = true;
+  }, (24 * 60 - (currentDate.getHours() * 60 + currentDate.getMinutes())) * 60 * 1000);
 
   const mapBtn = document.querySelector(".navbar-group--icon[alt='Map']");
   mapBtn.click();
 
   while (1) {
+    if (needResetResult) {
+      console.log("need reset");
+      result = {};
+      needResetResult = false;
+      currentDate = new Date();
+      setTimeout(() => {
+        needResetResult = true;
+      }, (24 * 60 - (currentDate.getHours() * 60 + currentDate.getMinutes())) * 60 * 1000);
+    }
+
     for (let mapId = 0; mapId < 4; ++mapId) {
-      if (typeof result[mapId] === "undefined") result[mapId] = [];
+      if (typeof result[mapId] === "undefined") result[mapId] = {};
 
       await new Promise((res) => setTimeout(res, 5e3));
 
@@ -29,11 +44,17 @@
         await new Promise((res) => setTimeout(res, 1e3));
 
         const buttonMine = document.querySelector(".plain-button");
-        if (
-          ![...buttonMine.classList].includes("disabled") &&
-          --result[mapId][indexItem] <= 0
-        ) {
+        if (![...buttonMine.classList].includes("disabled")) {
+          const boxdaylyLimit = [
+            ...document.querySelectorAll(".info-label"),
+          ].find((el) => el.innerText.includes("Daily Claim Limit"));
+          if (boxdaylyLimit) {
+            const dailyLimit = boxdaylyLimit.querySelector("div").innerText;
+            if (result[mapId][indexItem] >= dailyLimit) continue;
+          }
+
           buttonMine.click();
+          ++result[mapId][indexItem];
 
           await new Promise((res) => setTimeout(res, 1e3));
 
@@ -73,8 +94,6 @@
 
             await new Promise((res) => setTimeout(res, 3e3));
           }
-
-          result[mapId][indexItem] = 99;
         }
       }
 
