@@ -1,6 +1,7 @@
 (async () => {
   let result = {};
-  let currentDate = new Date();
+  let now = new Date();
+  let currentDate = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
   let needResetResult = false;
   setTimeout(() => {
     needResetResult = true;
@@ -14,7 +15,8 @@
       console.log("need reset");
       result = {};
       needResetResult = false;
-      currentDate = new Date();
+      now = new Date();
+      currentDate = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
       setTimeout(() => {
         needResetResult = true;
       }, (24 * 60 - (currentDate.getHours() * 60 + currentDate.getMinutes())) * 60 * 1000);
@@ -43,7 +45,9 @@
 
         await new Promise((res) => setTimeout(res, 1e3));
 
-        const buttonMine = document.querySelector(".plain-button");
+        const buttonMine = document.querySelector(
+          ".info-section .plain-button"
+        );
         if (![...buttonMine.classList].includes("disabled")) {
           const boxdaylyLimit = [
             ...document.querySelectorAll(".info-label"),
@@ -75,7 +79,9 @@
             await new Promise((res) => setTimeout(res, 1e3));
 
             // Repair instruments
-            const buttonRepair = document.querySelectorAll(".plain-button")[1];
+            const buttonRepair = document.querySelectorAll(
+              ".info-section .plain-button"
+            )[1];
             const quality = eval(
               document.querySelector(".card-number").innerText
             );
