@@ -1,11 +1,11 @@
 (async () => {
+  const TIME_TO_RESET = 3 * 60 * 60 * 1000;
+
   let result = {};
-  let now = new Date();
-  let currentDate = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
   let needResetResult = false;
   setTimeout(() => {
     needResetResult = true;
-  }, (24 * 60 - (currentDate.getHours() * 60 + currentDate.getMinutes())) * 60 * 1000);
+  }, TIME_TO_RESET);
 
   const mapBtn = document.querySelector(".navbar-group--icon[alt='Map']");
   mapBtn.click();
@@ -15,11 +15,9 @@
       console.log("need reset");
       result = {};
       needResetResult = false;
-      now = new Date();
-      currentDate = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
       setTimeout(() => {
         needResetResult = true;
-      }, (24 * 60 - (currentDate.getHours() * 60 + currentDate.getMinutes())) * 60 * 1000);
+      }, TIME_TO_RESET);
     }
 
     for (let mapId = 0; mapId < 4; ++mapId) {
