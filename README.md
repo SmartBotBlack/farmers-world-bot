@@ -13,3 +13,7 @@
 - The script presses the "Mine"/"Hatch" button on any map when the button is available.
 - If energy is less than 100 and food more than 20, it makes an exchange.
 - If the strength of the mining tool is less than half, it is repaired. Make sure you have enough gold in your account.
+
+## Support
+
+_Any problems? [Submit an issue](https://github.com/SmartBotBlack/farmers-world-bot/issues/new) or send message in telegram [@smartbotblack](https://t.me/smartbotblack) or email [hello@smartbot.black](https://smartbot.black)!_
