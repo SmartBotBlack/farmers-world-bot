@@ -99,7 +99,7 @@
           )[3].innerText;
           const currentFish =
             +document.querySelectorAll(".resource-number")[2].innerText;
-          if (currentEnergy < 100 && currentFish > 20) {
+          if (currentEnergy < 200 && currentFish > 20) {
             document.querySelector(".resource-energy img").click();
             await new Promise((res) => setTimeout(res, 1e3));
 
@@ -110,7 +110,7 @@
 
             document.querySelector(".modal-wrapper .plain-button").click();
 
-            await new Promise((res) => setTimeout(res, 3e3));
+            await new Promise((res) => setTimeout(res, 2e4));
           }
         }
       }
