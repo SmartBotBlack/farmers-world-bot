@@ -47,7 +47,10 @@
         const buttonMine = document.querySelector(
           ".info-section .plain-button"
         );
-        if (![...buttonMine.classList].includes("disabled")) {
+        const timeToEnd = document.querySelector(
+          ".info-section .info-time"
+        ).innerText;
+        if (![...buttonMine.classList].includes("disabled") && timeToEnd === '00:00:00') {
           const boxdaylyLimit = [
             ...document.querySelectorAll(".info-label"),
           ].find((el) => el.innerText.includes("Daily Claim Limit"));
