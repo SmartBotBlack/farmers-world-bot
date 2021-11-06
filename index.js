@@ -1,5 +1,6 @@
 (async () => {
-  const TIME_TO_RESET = 3 * 60 * 60 * 1000;
+  // Time to repeat an action for action with error  
+  const TIME_TO_RESET = 1 * 60 * 60 * 1000;
 
   let result = {};
   let needResetResult = false;
