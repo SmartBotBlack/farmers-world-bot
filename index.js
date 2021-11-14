@@ -1,5 +1,5 @@
 (async () => {
-  // Time to repeat an action for action with error  
+  // Time to repeat an action for action with error
   const TIME_TO_RESET = 1 * 60 * 60 * 1000;
 
   let result = {};
@@ -50,7 +50,10 @@
         const timeToEnd = document.querySelector(
           ".info-section .info-time"
         ).innerText;
-        if (![...buttonMine.classList].includes("disabled") && timeToEnd === '00:00:00') {
+        if (
+          ![...buttonMine.classList].includes("disabled") &&
+          timeToEnd === "00:00:00"
+        ) {
           const boxdaylyLimit = [
             ...document.querySelectorAll(".info-label"),
           ].find((el) => el.innerText.includes("Daily Claim Limit"));
@@ -67,16 +70,20 @@
           // If map with mining
           if (mapId === 0) {
             while (
-              !document.querySelector(".modal__button-group .plain-button")
+              !(
+                document.querySelector(".modal__button-group .plain-button") ||
+                document.querySelector(".modal-stake .modal-stake-close img")
+              )
             ) {
               await new Promise((res) => setTimeout(res, 5e3));
             }
 
             await new Promise((res) => setTimeout(res, 5e3));
 
-            document
-              .querySelector(".modal__button-group .plain-button")
-              .click();
+            (
+              document.querySelector(".modal__button-group .plain-button") ||
+              document.querySelector(".modal-stake .modal-stake-close img")
+            ).click();
 
             await new Promise((res) => setTimeout(res, 1e3));
 
