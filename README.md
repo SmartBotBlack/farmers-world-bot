@@ -11,7 +11,7 @@
 
 - Working with all the maps. Able to work with any kind of NFT.
 - The script presses the "Mine"/"Hatch" button on any map when the button is available.
-- If energy is less than 100 and food more than 20, it makes an exchange.
+- If energy is less than 200 and food more than 20, it makes an exchange.
 - If the strength of the mining tool is less than half, it is repaired. Make sure you have enough gold in your account.
 
 ## Support
