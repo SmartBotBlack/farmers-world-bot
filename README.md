@@ -1,5 +1,8 @@
 # Farmers World Bot Free
 
+## Video instructions
+https://youtu.be/C9OMiZCHKZg
+
 ## Instalation guide
 
 1. Open the game and log in.
@@ -16,4 +19,7 @@
 
 ## Support
 
-_Any problems? [Submit an issue](https://github.com/SmartBotBlack/farmers-world-bot/issues/new) or send message in telegram [@smartbotblack](https://t.me/smartbotblack) or email [hello@smartbot.black](https://smartbot.black)!_
+_Any problems? [Submit an issue](https://github.com/SmartBotBlack/farmers-world-bot/issues/new) or send message in telegram [@smartbotofficial](https://t.me/smartbotofficial) or email [hello@smartbot.black](hello@smartbot.black)!_
+
+### Official site
+https://smartbot.black
