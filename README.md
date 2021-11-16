@@ -1,6 +1,6 @@
 # Farmers World Bot Free
 
-## Video instructions
+## Video instruction
 https://youtu.be/C9OMiZCHKZg
 
 ## Instalation guide
