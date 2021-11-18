@@ -24,7 +24,13 @@
         const buttonMine = document.querySelector(
           ".info-section .plain-button"
         );
-        if (![...buttonMine.classList].includes("disabled")) {
+        const timeToEnd = document.querySelector(
+          ".info-section .info-time"
+        ).innerText;
+        if (
+          ![...buttonMine.classList].includes("disabled") &&
+          timeToEnd === "00:00:00"
+        ) {
           buttonMine.click();
 
           await new Promise((res) => setTimeout(res, 1e3));
@@ -56,7 +62,7 @@
           )[3].innerText;
           const currentFish =
             +document.querySelectorAll(".resource-number")[2].innerText;
-          if (currentEnergy < 100 && currentFish > 20) {
+          if (currentEnergy < 200 && currentFish > 20) {
             document.querySelector(".resource-energy img").click();
             await new Promise((res) => setTimeout(res, 1e3));
 
@@ -67,7 +73,7 @@
 
             document.querySelector(".modal-wrapper .plain-button").click();
 
-            await new Promise((res) => setTimeout(res, 3e3));
+            await new Promise((res) => setTimeout(res, 2e4));
           }
         }
       }
