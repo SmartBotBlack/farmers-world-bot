@@ -1,28 +1,9 @@
 (async () => {
-  const TIME_TO_RESET = 3 * 60 * 60 * 1000;
-
-  let result = {};
-  let needResetResult = false;
-  setTimeout(() => {
-    needResetResult = true;
-  }, TIME_TO_RESET);
-
   const mapBtn = document.querySelector(".navbar-group--icon[alt='Map']");
   mapBtn.click();
 
   while (1) {
-    if (needResetResult) {
-      console.log("need reset");
-      result = {};
-      needResetResult = false;
-      setTimeout(() => {
-        needResetResult = true;
-      }, TIME_TO_RESET);
-    }
-
     for (let mapId = 0; mapId < 4; ++mapId) {
-      if (typeof result[mapId] === "undefined") result[mapId] = {};
-
       await new Promise((res) => setTimeout(res, 5e3));
 
       const map = document.querySelectorAll(".map-container-bg")[mapId];
@@ -36,9 +17,6 @@
       for (const [indexItem, item] of document
         .querySelectorAll(".vertical-carousel-container img")
         .entries()) {
-        if (typeof result[mapId][indexItem] === "undefined")
-          result[mapId][indexItem] = 0;
-
         item.click();
 
         await new Promise((res) => setTimeout(res, 1e3));
@@ -47,16 +25,7 @@
           ".info-section .plain-button"
         );
         if (![...buttonMine.classList].includes("disabled")) {
-          const boxdaylyLimit = [
-            ...document.querySelectorAll(".info-label"),
-          ].find((el) => el.innerText.includes("Daily Claim Limit"));
-          if (boxdaylyLimit) {
-            const dailyLimit = boxdaylyLimit.querySelector("div").innerText;
-            if (result[mapId][indexItem] >= dailyLimit) continue;
-          }
-
           buttonMine.click();
-          ++result[mapId][indexItem];
 
           await new Promise((res) => setTimeout(res, 1e3));
 
