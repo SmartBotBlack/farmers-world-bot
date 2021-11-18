@@ -62,19 +62,7 @@
 
           // If map with mining
           if (mapId === 0) {
-            while (
-              !document.querySelector(".modal__button-group .plain-button")
-            ) {
-              await new Promise((res) => setTimeout(res, 5e3));
-            }
-
-            await new Promise((res) => setTimeout(res, 5e3));
-
-            document
-              .querySelector(".modal__button-group .plain-button")
-              .click();
-
-            await new Promise((res) => setTimeout(res, 1e3));
+            await new Promise((res) => setTimeout(res, 1e4));
 
             // Repair instruments
             const buttonRepair = document.querySelectorAll(
