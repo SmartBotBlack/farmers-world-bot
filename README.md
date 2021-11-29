@@ -22,8 +22,8 @@ https://youtu.be/D028TAAe5H8
 
 ### 29/11/2021
 
-- Added the ability to select maps for mining. #4
-- Improved the setting of pauses in the game. #4
+- Added the ability to select maps for mining. [issues #4](https://github.com/SmartBotBlack/farmers-world-bot/issues/4)
+- Improved the setting of pauses in the game. [issues #4](https://github.com/SmartBotBlack/farmers-world-bot/issues/4)
 
 ## Support
 
