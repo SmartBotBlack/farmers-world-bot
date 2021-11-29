@@ -1,6 +1,7 @@
 # Farmers World Bot Free
 
 ## Video instruction
+
 https://youtu.be/D028TAAe5H8
 
 ## Instalation guide
@@ -17,9 +18,17 @@ https://youtu.be/D028TAAe5H8
 - If energy is less than 200 and food more than 20, it makes an exchange.
 - If the strength of the mining tool is less than half, it is repaired. Make sure you have enough gold in your account.
 
+## Changelog
+
+### 29/11/2021
+
+- Added the ability to select maps for mining. [issues #4](https://github.com/SmartBotBlack/farmers-world-bot/issues/4)
+- Improved the setting of pauses in the game. [issues #4](https://github.com/SmartBotBlack/farmers-world-bot/issues/4)
+
 ## Support
 
 _Any problems? [Submit an issue](https://github.com/SmartBotBlack/farmers-world-bot/issues/new) or send message in telegram [@smartbotofficial](https://t.me/smartbotofficial) or email [hello@smartbot.black](hello@smartbot.black)!_
 
 ### Official site
+
 https://smartbot.black

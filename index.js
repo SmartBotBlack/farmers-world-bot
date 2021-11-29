@@ -1,10 +1,29 @@
 (async () => {
+  // Maps on which you can collect resources
+  // 1 — Mining
+  // 2 — Chiken
+  // 3 — Plant
+  // 4 — Cow
+  const availableMaps = [1, 2, 3, 4];
+  // Delay between moving to the next map (5sec)
+  const delayNextMap = 5 * 1000;
+  // Delay after map selection (5sec)
+  const delayAfterMapSelect = 5 * 1000;
+  // Delay after mine (1sec)
+  const delayAfterMine = 1 * 1000;
+  // Delay before repair begins (10sec)
+  const delayBeforeRepair = 10 * 1000;
+  // Delay after repair begins (1sec)
+  const delayAfterRepair = 1 * 1000;
+
   const mapBtn = document.querySelector(".navbar-group--icon[alt='Map']");
   mapBtn.click();
 
   while (1) {
     for (let mapId = 0; mapId < 4; ++mapId) {
-      await new Promise((res) => setTimeout(res, 5e3));
+      if (!availableMaps.includes(mapId + 1)) continue;
+
+      await new Promise((res) => setTimeout(res, delayNextMap));
 
       const map = document.querySelectorAll(".map-container-bg")[mapId];
 
@@ -12,7 +31,7 @@
 
       map.click();
 
-      await new Promise((res) => setTimeout(res, 5e3));
+      await new Promise((res) => setTimeout(res, delayAfterMapSelect));
 
       for (const [indexItem, item] of document
         .querySelectorAll(".vertical-carousel-container img")
@@ -33,11 +52,11 @@
         ) {
           buttonMine.click();
 
-          await new Promise((res) => setTimeout(res, 1e3));
+          await new Promise((res) => setTimeout(res, delayAfterMine));
 
           // If map with mining
           if (mapId === 0) {
-            await new Promise((res) => setTimeout(res, 1e4));
+            await new Promise((res) => setTimeout(res, delayBeforeRepair));
 
             // Repair instruments
             const buttonRepair = document.querySelectorAll(
@@ -51,11 +70,9 @@
               quality < 0.5
             ) {
               buttonRepair.click();
-              await new Promise((res) => setTimeout(res, 1e3));
+              await new Promise((res) => setTimeout(res, delayAfterRepair));
             }
           }
-
-          await new Promise((res) => setTimeout(res, 1e4));
 
           const currentEnergy = +document.querySelectorAll(
             ".resource-number div"
