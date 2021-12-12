@@ -22,7 +22,8 @@ https://youtu.be/D028TAAe5H8
 
 ### 13/12/2021
 
-- Improved algorithm for closing popups
+- Improved algorithm for closing popups.
+- The energy system has been redesigned. The bot now tries to always maintain the maximum amount of energy. This fixes a bug on some single player maps.
 
 ### 29/11/2021
 
