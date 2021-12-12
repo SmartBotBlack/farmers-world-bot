@@ -25,6 +25,7 @@ https://youtu.be/D028TAAe5H8
 - Improved algorithm for closing succes popups.
 - The energy system has been redesigned. The bot now tries to always maintain the maximum amount of energy. This fixes a bug on some single player maps.
 - Improved algorithm for closing CPU error popups.
+- Added a random pause between actions.
 
 ### 29/11/2021
 
