@@ -1,4 +1,12 @@
 (async () => {
+  setInterval(() => {
+    const buttonClosePopup = document.querySelector(
+      ".modal .plain-button.short"
+    );
+
+    if (buttonClosePopup) buttonClosePopup.click();
+  }, 1 * 1000);
+
   const mapBtn = document.querySelector(".navbar-group--icon[alt='Map']");
   mapBtn.click();
 
@@ -14,7 +22,7 @@
 
       await new Promise((res) => setTimeout(res, 5e3));
 
-      for (const [indexItem, item] of document
+      for (const [item] of document
         .querySelectorAll(".vertical-carousel-container img")
         .entries()) {
         item.click();
