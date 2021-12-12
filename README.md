@@ -24,6 +24,11 @@ https://youtu.be/D028TAAe5H8
 
 - Improved algorithm for closing popups
 
+### 29/11/2021
+
+- Added the ability to select maps for mining. [issues #4](https://github.com/SmartBotBlack/farmers-world-bot/issues/4)
+- Improved the setting of pauses in the game. [issues #4](https://github.com/SmartBotBlack/farmers-world-bot/issues/4)
+
 ## Support
 
 _Any problems? [Submit an issue](https://github.com/SmartBotBlack/farmers-world-bot/issues/new) or send message in telegram [@smartbotofficial](https://t.me/smartbotofficial) or email [hello@smartbot.black](hello@smartbot.black)!_
