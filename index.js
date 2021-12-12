@@ -24,6 +24,14 @@
     if (buttonClosePopup) buttonClosePopup.click();
   }, 1 * 1000);
 
+  setInterval(() => {
+    const buttonCloseCPUPopup = document.querySelector(
+      ".modal-stake .modal-stake-close img"
+    );
+
+    if (buttonCloseCPUPopup) buttonCloseCPUPopup.click();
+  }, 1 * 1000);
+
   const mapBtn = document.querySelector(".navbar-group--icon[alt='Map']");
   mapBtn.click();
 
