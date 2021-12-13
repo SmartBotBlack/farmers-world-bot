@@ -9,8 +9,8 @@
   const delayNextMap = [5 * 1000, 15 * 1000];
   // Delay after map selection [min, max] [5sec, 15sec]
   const delayAfterMapSelect = [5 * 1000, 15 * 1000];
-  // Delay after mine [min, max] [1sec, 3sec]
-  const delayAfterMine = [1 * 1000, 3 * 1000];
+  // Delay after mine [min, max] [10sec, 25sec]
+  const delayAfterMine = [10 * 1000, 25 * 1000];
   // Delay before repair begins [min, max] [8sec, 15sec]
   const delayBeforeRepair = [8 * 1000, 15 * 1000];
   // Delay after repair begins [min, max] [1sec, 3sec]
