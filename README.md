@@ -20,6 +20,10 @@ https://youtu.be/D028TAAe5H8
 
 ## Changelog
 
+### 14/12/2021
+
+- Fix error mine on first map, if you have Member card.
+
 ### 13/12/2021
 
 - Improved algorithm for closing succes popups.

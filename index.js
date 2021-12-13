@@ -116,17 +116,19 @@
             const buttonRepair = document.querySelectorAll(
               ".info-section .plain-button"
             )[1];
-            const quality = eval(
-              document.querySelector(".card-number").innerText
-            );
-            if (
-              ![...buttonRepair.classList].includes("disabled") &&
-              quality < 0.5
-            ) {
-              buttonRepair.click();
-              await new Promise((res) =>
-                setTimeout(res, random(...delayAfterRepair))
+            if (buttonRepair) {
+              const quality = eval(
+                document.querySelector(".card-number").innerText
               );
+              if (
+                ![...buttonRepair.classList].includes("disabled") &&
+                quality < 0.5
+              ) {
+                buttonRepair.click();
+                await new Promise((res) =>
+                  setTimeout(res, random(...delayAfterRepair))
+                );
+              }
             }
           }
         }
