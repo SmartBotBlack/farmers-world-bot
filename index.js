@@ -70,7 +70,6 @@
             currentFish,
             Math.floor((maxEnergy - currentEnergy) / 5)
           );
-          console.log("countEnergyClicks", countEnergyClicks);
 
           if (countEnergyClicks > 0) {
             document.querySelector(".resource-energy img").click();
