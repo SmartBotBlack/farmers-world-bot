@@ -26,6 +26,7 @@ https://youtu.be/D028TAAe5H8
 - The energy system has been redesigned. The bot now tries to always maintain the maximum amount of energy. This fixes a bug on some single player maps.
 - Improved algorithm for closing CPU error popups.
 - Added a random pause between actions.
+- Fixed a mining bug when using Member card.
 
 ### 29/11/2021
 
