@@ -99,7 +99,7 @@
 
         if (
           ![...buttonMine.classList].includes("disabled") &&
-          timeToEnd === "00:00:00"
+          (timeToEnd === "00:00:00" || mapId === 0)
         ) {
           buttonMine.click();
 
