@@ -58,8 +58,9 @@
         .querySelectorAll(".vertical-carousel-container img")
         .entries()) {
         // Restore energy start
-        const currentFish =
-          +document.querySelectorAll(".resource-number")[2].innerText;
+        const currentFish = Math.floor(
+          +document.querySelectorAll(".resource-number")[2].innerText
+        );
         const [currentEnergy, maxEnergy] = document
           .querySelectorAll(".resource-number")[3]
           .textContent.split("/")
