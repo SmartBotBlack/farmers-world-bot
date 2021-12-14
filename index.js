@@ -65,7 +65,7 @@
           .textContent.split("/")
           .map(Number);
 
-        if (maxEnergy - currentEnergy > 100) {
+        if (maxEnergy - currentEnergy > 100 && currentFish > 1) {
           const countEnergyClicks = Math.min(
             currentFish,
             Math.floor((maxEnergy - currentEnergy) / 5)
