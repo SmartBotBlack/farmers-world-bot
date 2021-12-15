@@ -20,6 +20,10 @@ https://youtu.be/D028TAAe5H8
 
 ## Changelog
 
+### 16/12/2021
+
+- Now the bot tries to restore work, even if there was an error.
+
 ### 14/12/2021
 
 - Fix error mine on first map, if you have Member card.

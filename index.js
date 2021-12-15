@@ -39,102 +39,112 @@
   mapBtn.click();
 
   while (1) {
-    for (let mapId = 0; mapId < 4; ++mapId) {
-      if (!availableMaps.includes(mapId + 1)) continue;
+    try {
+      for (let mapId = 0; mapId < 4; ++mapId) {
+        if (!availableMaps.includes(mapId + 1)) continue;
 
-      await new Promise((res) => setTimeout(res, random(...delayNextMap)));
+        await new Promise((res) => setTimeout(res, random(...delayNextMap)));
 
-      const map = document.querySelectorAll(".map-container-bg")[mapId];
+        const map = document.querySelectorAll(".map-container-bg")[mapId];
 
-      if (map.style.filter === "grayscale(1)") continue;
+        if (map.style.filter === "grayscale(1)") continue;
 
-      map.click();
+        map.click();
 
-      await new Promise((res) =>
-        setTimeout(res, random(...delayAfterMapSelect))
-      );
-
-      for (const [, item] of document
-        .querySelectorAll(".vertical-carousel-container img")
-        .entries()) {
-        // Restore energy start
-        const currentFish = Math.floor(
-          +document.querySelectorAll(".resource-number")[2].innerText
+        await new Promise((res) =>
+          setTimeout(res, random(...delayAfterMapSelect))
         );
-        const [currentEnergy, maxEnergy] = document
-          .querySelectorAll(".resource-number")[3]
-          .textContent.split("/")
-          .map(Number);
 
-        if (maxEnergy - currentEnergy > 100 && currentFish > 1) {
-          const countEnergyClicks = Math.min(
-            currentFish,
-            Math.floor((maxEnergy - currentEnergy) / 5)
+        for (const [, item] of document
+          .querySelectorAll(".vertical-carousel-container img")
+          .entries()) {
+          // Restore energy start
+          const currentFish = Math.floor(
+            +document.querySelectorAll(".resource-number")[2].innerText
           );
+          const [currentEnergy, maxEnergy] = document
+            .querySelectorAll(".resource-number")[3]
+            .textContent.split("/")
+            .map(Number);
 
-          if (countEnergyClicks > 0) {
-            document.querySelector(".resource-energy img").click();
-            await new Promise((res) => setTimeout(res, random(1, 2) * 1000));
-
-            for (let i = 0; i++ < countEnergyClicks; ) {
-              document.querySelector(".image-button[alt='Plus Icon']").click();
-              await new Promise((res) => setTimeout(res, random(2, 10) * 100));
-            }
-            document.querySelector(".modal-wrapper .plain-button").click();
-            await new Promise((res) => setTimeout(res, random(15, 15) * 1000));
-          }
-        }
-        // Restore energy end
-
-        item.click();
-
-        await new Promise((res) => setTimeout(res, random(1, 2) * 1000));
-
-        const buttonMine = document.querySelector(
-          ".info-section .plain-button"
-        );
-        const timeToEnd = document.querySelector(
-          ".info-section .info-time"
-        ).innerText;
-
-        if (
-          ![...buttonMine.classList].includes("disabled") &&
-          (timeToEnd === "00:00:00" || mapId === 0)
-        ) {
-          buttonMine.click();
-
-          await new Promise((res) =>
-            setTimeout(res, random(...delayAfterMine))
-          );
-
-          // If map with mining
-          if (mapId === 0) {
-            await new Promise((res) =>
-              setTimeout(res, random(...delayBeforeRepair))
+          if (maxEnergy - currentEnergy > 100 && currentFish > 1) {
+            const countEnergyClicks = Math.min(
+              currentFish,
+              Math.floor((maxEnergy - currentEnergy) / 5)
             );
 
-            // Repair instruments
-            const buttonRepair = document.querySelectorAll(
-              ".info-section .plain-button"
-            )[1];
-            if (buttonRepair) {
-              const quality = eval(
-                document.querySelector(".card-number").innerText
-              );
-              if (
-                ![...buttonRepair.classList].includes("disabled") &&
-                quality < 0.5
-              ) {
-                buttonRepair.click();
+            if (countEnergyClicks > 0) {
+              document.querySelector(".resource-energy img").click();
+              await new Promise((res) => setTimeout(res, random(1, 2) * 1000));
+
+              for (let i = 0; i++ < countEnergyClicks; ) {
+                document
+                  .querySelector(".image-button[alt='Plus Icon']")
+                  .click();
                 await new Promise((res) =>
-                  setTimeout(res, random(...delayAfterRepair))
+                  setTimeout(res, random(2, 10) * 100)
                 );
+              }
+              document.querySelector(".modal-wrapper .plain-button").click();
+              await new Promise((res) =>
+                setTimeout(res, random(15, 15) * 1000)
+              );
+            }
+          }
+          // Restore energy end
+
+          item.click();
+
+          await new Promise((res) => setTimeout(res, random(1, 2) * 1000));
+
+          const buttonMine = document.querySelector(
+            ".info-section .plain-button"
+          );
+          const timeToEnd = document.querySelector(
+            ".info-section .info-time"
+          ).innerText;
+
+          if (
+            ![...buttonMine.classList].includes("disabled") &&
+            (timeToEnd === "00:00:00" || mapId === 0)
+          ) {
+            buttonMine.click();
+
+            await new Promise((res) =>
+              setTimeout(res, random(...delayAfterMine))
+            );
+
+            // If map with mining
+            if (mapId === 0) {
+              await new Promise((res) =>
+                setTimeout(res, random(...delayBeforeRepair))
+              );
+
+              // Repair instruments
+              const buttonRepair = document.querySelectorAll(
+                ".info-section .plain-button"
+              )[1];
+              if (buttonRepair) {
+                const quality = eval(
+                  document.querySelector(".card-number").innerText
+                );
+                if (
+                  ![...buttonRepair.classList].includes("disabled") &&
+                  quality < 0.5
+                ) {
+                  buttonRepair.click();
+                  await new Promise((res) =>
+                    setTimeout(res, random(...delayAfterRepair))
+                  );
+                }
               }
             }
           }
         }
-      }
 
+        mapBtn.click();
+      }
+    } catch (e) {
       mapBtn.click();
     }
   }
