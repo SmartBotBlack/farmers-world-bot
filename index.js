@@ -67,7 +67,7 @@
             .textContent.split("/")
             .map(Number);
 
-          if (maxEnergy - currentEnergy > 100 && currentFish > 1) {
+          if (currentEnergy < 300 && currentFish > 1) {
             const countEnergyClicks = Math.min(
               currentFish,
               Math.floor((maxEnergy - currentEnergy) / 5)
@@ -75,12 +75,24 @@
 
             if (countEnergyClicks > 0) {
               document.querySelector(".resource-energy img").click();
-              await new Promise((res) => setTimeout(res, random(1, 2) * 1000));
+              const selectorPlusIcon = ".image-button[alt='Plus Icon']";
+
+              await Promise.race([
+                async () => {
+                  while (
+                    document.querySelector(selectorPlusIcon).offsetParent ===
+                    null
+                  ) {
+                    await new Promise((res) => setTimeout(res, 1 * 1000));
+                  }
+                },
+                new Promise((res) =>
+                  setTimeout((res) => setTimeout(res, 60 * 1000))
+                ),
+              ]);
 
               for (let i = 0; i++ < countEnergyClicks; ) {
-                document
-                  .querySelector(".image-button[alt='Plus Icon']")
-                  .click();
+                document.querySelector(selectorPlusIcon).click();
                 await new Promise((res) =>
                   setTimeout(res, random(2, 10) * 100)
                 );
