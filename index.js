@@ -118,7 +118,8 @@
 
           if (
             ![...buttonMine.classList].includes("disabled") &&
-            (timeToEnd === "00:00:00" || mapId === 0)
+            (timeToEnd === "00:00:00" || mapId === 0) &&
+            buttonMine.textContent !== "Remove"
           ) {
             buttonMine.click();
 
@@ -154,9 +155,47 @@
           }
         }
 
+        /**
+         * Breeding start
+         */
+        const breedingStartBtn = document.querySelector(
+          ".button-cow-breeding .plain-button"
+        );
+        if (mapId === 3 && breedingStartBtn) {
+          breedingStartBtn.click();
+
+          await new Promise((res) => setTimeout(res, 5 * 1000));
+
+          const breedingBtn = document.querySelector(
+            ".cows-breeding__drop .button-section:nth-child(1) .plain-button:not(.disabled)"
+          );
+          if (breedingBtn) {
+            breedingBtn.click();
+            await new Promise((res) => setTimeout(res, 15 * 1000));
+          }
+
+          const closeBreedingBtn = document.querySelector(
+            ".cows-breeding img.close-cows-modal.image-button"
+          );
+
+          closeBreedingBtn.click();
+          await new Promise((res) => setTimeout(res, 2 * 1000));
+        }
+        /**
+         * Breeding end
+         */
+
         mapBtn.click();
       }
     } catch (e) {
+      const modalCloseBtn = document.querySelector(
+        ".modal-wrapper img.close-cows-modal.image-button"
+      );
+      if (modalCloseBtn) {
+        modalCloseBtn.click();
+        await new Promise((res) => setTimeout(res, 5 * 1000));
+      }
+
       mapBtn.click();
     }
   }
