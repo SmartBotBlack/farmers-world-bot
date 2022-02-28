@@ -5,16 +5,14 @@
   // 3 — Plant
   // 4 — Cow
   const availableMaps = [1, 2, 3, 4];
-  // Delay between moving to the next map [min, max] [5sec, 15sec]
-  const delayNextMap = [5 * 1000, 15 * 1000];
-  // Delay after map selection [min, max] [5sec, 15sec]
-  const delayAfterMapSelect = [5 * 1000, 15 * 1000];
-  // Delay after mine [min, max] [10sec, 25sec]
-  const delayAfterMine = [10 * 1000, 25 * 1000];
-  // Delay before repair begins [min, max] [8sec, 15sec]
-  const delayBeforeRepair = [8 * 1000, 15 * 1000];
-  // Delay after repair begins [min, max] [1sec, 3sec]
-  const delayAfterRepair = [1 * 1000, 3 * 1000];
+  // Delay between moving to the next map [min, max]
+  const delayNextMap = [10 * 1000, 15 * 1000];
+  // Delay after map selection [min, max]
+  const delayAfterMapSelect = [5 * 1000, 10 * 1000];
+  // Delay after mine [min, max]
+  const delayAfterMine = [15 * 1000, 20 * 1000];
+  // Delay after repair [min, max]
+  const delayAfterRepair = [10 * 1000, 15 * 1000];
 
   const random = (min, max) =>
     Math.floor(Math.random() * (max - min + 1) + min);
@@ -24,7 +22,10 @@
       ".modal .plain-button.short"
     );
 
-    if (buttonClosePopup) buttonClosePopup.click();
+    if (buttonClosePopup) {
+      console.log("Closing popup, modal .plain-button.short");
+      buttonClosePopup.click();
+    }
   }, random(1, 2) * 1000);
 
   setInterval(() => {
@@ -40,6 +41,7 @@
 
   while (1) {
     try {
+      // For each map
       for (let mapId = 0; mapId < 4; ++mapId) {
         if (!availableMaps.includes(mapId + 1)) continue;
 
@@ -50,14 +52,17 @@
         if (map.style.filter === "grayscale(1)") continue;
 
         map.click();
+        console.log("I Switched to map: " + mapId);
 
         await new Promise((res) =>
           setTimeout(res, random(...delayAfterMapSelect))
         );
 
+        // For each NFT in the vertical carousel
         for (const [, item] of document
           .querySelectorAll(".vertical-carousel-container img")
           .entries()) {
+
           // Restore energy start
           const currentFish = Math.floor(
             +document.querySelectorAll(".resource-number")[2].innerText
@@ -67,7 +72,7 @@
             .textContent.split("/")
             .map(Number);
 
-          if (currentEnergy < 300 && currentFish > 1) {
+          if (currentEnergy < 400 && currentFish > 1) {
             const countEnergyClicks = Math.min(
               currentFish,
               Math.floor((maxEnergy - currentEnergy) / 5)
@@ -75,28 +80,17 @@
 
             if (countEnergyClicks > 0) {
               document.querySelector(".resource-energy img").click();
-              const selectorPlusIcon = ".image-button[alt='Plus Icon']";
-
-              await Promise.race([
-                async () => {
-                  while (
-                    document.querySelector(selectorPlusIcon).offsetParent ===
-                    null
-                  ) {
-                    await new Promise((res) => setTimeout(res, 1 * 1000));
-                  }
-                },
-                new Promise((res) =>
-                  setTimeout((res) => setTimeout(res, 60 * 1000))
-                ),
-              ]);
+              await new Promise((res) => setTimeout(res, random(1, 2) * 1000));
 
               for (let i = 0; i++ < countEnergyClicks; ) {
-                document.querySelector(selectorPlusIcon).click();
+                document
+                  .querySelector(".image-button[alt='Plus Icon']")
+                  .click();
                 await new Promise((res) =>
-                  setTimeout(res, random(2, 10) * 100)
+                  setTimeout(res, 50)
                 );
               }
+              console.log("*** Restoring energy from " + currentEnergy);
               document.querySelector(".modal-wrapper .plain-button").click();
               await new Promise((res) =>
                 setTimeout(res, random(15, 15) * 1000)
@@ -109,6 +103,8 @@
 
           await new Promise((res) => setTimeout(res, random(1, 2) * 1000));
 
+          const cardName = document.querySelector(
+                ".info-section .info-title-name").innerText;
           const buttonMine = document.querySelector(
             ".info-section .plain-button"
           );
@@ -116,87 +112,74 @@
             ".info-section .info-time"
           ).innerText;
 
-          if (
-            ![...buttonMine.classList].includes("disabled") &&
-            (timeToEnd === "00:00:00" || mapId === 0) &&
-            buttonMine.textContent !== "Remove"
-          ) {
-            buttonMine.click();
+          console.log("Looking at card: " + cardName);
 
-            await new Promise((res) =>
-              setTimeout(res, random(...delayAfterMine))
-            );
-
-            // If map with mining
-            if (mapId === 0) {
-              await new Promise((res) =>
-                setTimeout(res, random(...delayBeforeRepair))
+          // Repair tool if needed
+          if (mapId === 0) {
+            const buttonRepair = document.querySelectorAll(
+              ".info-section .plain-button"
+            )[1];
+            if (buttonRepair) {
+              const quality = eval(
+                document.querySelector(".card-number").innerText
               );
-
-              // Repair instruments
-              const buttonRepair = document.querySelectorAll(
-                ".info-section .plain-button"
-              )[1];
-              if (buttonRepair) {
-                const quality = eval(
-                  document.querySelector(".card-number").innerText
+              if (
+                ![...buttonRepair.classList].includes("disabled") &&
+                quality < 0.5
+              ) {
+                buttonRepair.click();
+                await new Promise((res) =>
+                  setTimeout(res, random(...delayAfterRepair))
                 );
-                if (
-                  ![...buttonRepair.classList].includes("disabled") &&
-                  quality < 0.5
-                ) {
-                  buttonRepair.click();
-                  await new Promise((res) =>
-                    setTimeout(res, random(...delayAfterRepair))
-                  );
-                }
               }
             }
           }
-        }
 
-        /**
-         * Breeding start
-         */
-        const breedingStartBtn = document.querySelector(
-          ".button-cow-breeding .plain-button"
-        );
-        if (mapId === 3 && breedingStartBtn) {
-          breedingStartBtn.click();
-
-          await new Promise((res) => setTimeout(res, 5 * 1000));
-
-          const breedingBtn = document.querySelector(
-            ".cows-breeding__drop .button-section:nth-child(1) .plain-button:not(.disabled)"
-          );
-          if (breedingBtn) {
-            breedingBtn.click();
-            await new Promise((res) => setTimeout(res, 15 * 1000));
+          // Skip if disabled
+          if ([...buttonMine.classList].includes("disabled")) {
+            console.log("Mine button disabled, skipping");
+            continue;
           }
 
-          const closeBreedingBtn = document.querySelector(
-            ".cows-breeding img.close-cows-modal.image-button"
+          if (mapId === 0) {
+            // Handle mining tools / member cards
+            const mineLevelDiv = document.querySelector(
+              ".info-section .info-title-level"
+            );
+            if (!mineLevelDiv) {
+              console.log("Member NFT click: " + document.querySelector(
+              ".info-section .info-title-name").innerText);
+              buttonMine.click();
+            } else {
+              const mineLevels = mineLevelDiv.innerText.split("/");
+              if (mineLevels[0] === mineLevels[1]) {
+                console.log("CLICK Tool NFT: " + document.querySelector(
+                            ".info-section .info-title-name").innerText
+                            + ", mineLevels: " + mineLevels);
+                buttonMine.click();
+              } else {
+                console.log("Skipping Tool: " + document.querySelector(
+                            ".info-section .info-title-name").innerText
+                            + ", mineLevels: " + mineLevels);
+                continue;
+              }
+            }
+          } else if (timeToEnd === "00:00:00") {
+            console.log("00:00:00 time left, time to click");
+            buttonMine.click();
+          } else {
+            console.log("Not ready to click, skipping"); // TODO: probably can't get here
+          }
+          await new Promise((res) =>
+            setTimeout(res, random(...delayAfterMine))
           );
-
-          closeBreedingBtn.click();
-          await new Promise((res) => setTimeout(res, 2 * 1000));
         }
-        /**
-         * Breeding end
-         */
 
         mapBtn.click();
       }
     } catch (e) {
-      const modalCloseBtn = document.querySelector(
-        ".modal-wrapper img.close-cows-modal.image-button"
-      );
-      if (modalCloseBtn) {
-        modalCloseBtn.click();
-        await new Promise((res) => setTimeout(res, 5 * 1000));
-      }
-
       mapBtn.click();
     }
   }
 })();
+
