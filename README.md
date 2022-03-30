@@ -20,6 +20,10 @@ https://youtu.be/D028TAAe5H8
 
 ## Changelog
 
+### 30/03/2022
+
+- Added a version of the script that [can work in the background tab](https://github.com/SmartBotBlack/farmers-world-bot/blob/without-trottling-background-tab/index.js).
+
 ### 16/12/2021
 
 - Now the bot tries to restore work, even if there was an error.
